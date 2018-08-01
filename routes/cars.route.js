@@ -2,6 +2,8 @@ import express from "express";
 import carController from "../controllers/cars.controller"
 const router = express.Router()
 
+router.get('/la', (req, res) => res.send('Hello World!'))
+
 router.get('/allcars', (req, res) => {
     carController.getAll(req, res);
 });
