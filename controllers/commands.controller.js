@@ -12,7 +12,7 @@ controller.addCommand = async (req, res) => {
     });
     try {
         // Put your script here to been executed when requested... 
-        execString(`echo quantity: ${commandToAdd.quantity}`)
+        execString(`echo quantity: ${commandToAdd.quantity}, userId: ${commandToAdd.userId}`)
         // add command to db
         const savedCommand = await Command.addCommand(commandToAdd);
 

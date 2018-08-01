@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <title>Command Factory</title>
+</head>
+
+<body>
+    <nav class="navbar navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+            <img src="./factory-stock-house.png" width="30" height="30" class="d-inline-block align-top" alt=""> Command Factory
+        </a>
+    </nav>
+
+    <form class="col-10 mx-auto mt-3">
+        <div class="form-group">
+            <label for="userId">User ID</label>
+            <input class="form-control" type="text" id="userId">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input class="form-control" type="text" id="quantity">
+        </div>
+    </form>
+    <div class="col-10 mx-auto">
+        <button class="btn btn-outline-primary" onclick="sendReq()">Let's Go</button>
+    </div>
+
+
+    <script>
+        function sendReq() {
+            var xhr = new XMLHttpRequest();
+            var url = "http://localhost:3000/commands/test";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");           
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                }
+            };
+            var data = JSON.stringify({ "userId": document.getElementById("userId").value, "quantity": document.getElementById("quantity").value });
+            xhr.send(data)
+        }
+    </script>
+</body>
+
+</html>
