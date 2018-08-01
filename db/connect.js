@@ -4,6 +4,8 @@ import config from '../core/config/config.dev'
 
 Mongoose.Promise = global.Promise;
 
+// DB setup
+
 const connectToDb = async () => {
     let dbHost = config.dbHost;
     let dbPort = config.dbPort;
