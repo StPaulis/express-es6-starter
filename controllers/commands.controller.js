@@ -7,12 +7,22 @@ const controller = {};
 controller.addCommand = async (req, res) => {
     // Take arguments
     let commandToAdd = Command({
-        quantity: req.body.quantity,
-        userId: req.body.userId,
+        // quantity: req.body.quantity,
+        // userId: req.body.userId,
+        target_url: req.body.target_url,
+        virtual_users: req.body.virtual_users,
+        test_duration: req.body.test_duration
     });
     try {
         // Put your script here to been executed when requested... 
-        execString(`echo quantity: ${commandToAdd.quantity}, userId: ${commandToAdd.userId}`)
+        
+        // execString(`echo quantity: ${commandToAdd.quantity}, userId: ${commandToAdd.userId}`)
+        // execString(`python ../scripts/loadtest/trigger.py ${commandToAdd.target_url} ${commandToAdd.virtual_users} ${commandToAdd.test_duration}`)
+        logger.info('Executing Python script...');
+        const spawn = require("child_process").spawn;
+        const execString = spawn('python',["../scripts/loadtest/trigger.py", commandToAdd.target_url, commandToAdd.virtual_users, commandToAdd.test_duration]);
+        logger.info('Python script executed...');
+        
         // add command to db
         const savedCommand = await Command.addCommand(commandToAdd);
 
