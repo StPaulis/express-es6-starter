@@ -21,13 +21,25 @@
     </nav>
 
     <form class="col-10 mx-auto mt-3">
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="userId">User ID</label>
             <input class="form-control" type="text" id="userId">
         </div>
         <div class="form-group">
             <label for="quantity">Quantity</label>
             <input class="form-control" type="text" id="quantity">
+        </div> -->
+        <div class="form-group">
+            <label for="target_url">target_url</label>
+            <input class="form-control" type="text" id="target_url">
+        </div>
+        <div class="form-group">
+            <label for="virtual_users">virtual users</label>
+            <input class="form-control" type="text" id="virtual_users">
+        </div>
+        <div class="form-group">
+            <label for="test_duration">test_duration</label>
+            <input class="form-control" type="text" id="test_duration">
         </div>
     </form>
     <div class="col-10 mx-auto">
@@ -47,7 +59,15 @@
                     var json = JSON.parse(xhr.responseText);
                 }
             };
-            var data = JSON.stringify({ "userId": document.getElementById("userId").value, "quantity": document.getElementById("quantity").value });
+            var data = JSON.stringify(
+                { 
+                    // "userId": document.getElementById("userId").value, 
+                    // "quantity": document.getElementById("quantity").value 
+                    "target_url": document.getElementById("target_url").value,
+                    "virtual_users": document.getElementById("virtual_users").value,
+                    "test_duration": document.getElementById("test_duration").value
+                }
+            );
             xhr.send(data)
         }
     </script>
