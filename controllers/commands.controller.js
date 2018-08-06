@@ -18,6 +18,10 @@ controller.addCommand = async (req, res) => {
         
         // execString(`echo quantity: ${commandToAdd.quantity}, userId: ${commandToAdd.userId}`)
         // execString(`python ../scripts/loadtest/trigger.py ${commandToAdd.target_url} ${commandToAdd.virtual_users} ${commandToAdd.test_duration}`)
+        logger.info('...'+commandToAdd.target_url+'...');
+        logger.info('...'+commandToAdd.virtual_users+'...');
+        logger.info('...'+commandToAdd.test_duration+'...');
+        
         logger.info('Executing Python script...');
         const spawn = require("child_process").spawn;
         const execString = spawn('python',["../scripts/loadtest/trigger.py", commandToAdd.target_url, commandToAdd.virtual_users, commandToAdd.test_duration]);
