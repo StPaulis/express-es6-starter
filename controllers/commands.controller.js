@@ -29,7 +29,7 @@ controller.addCommand = async (req, res) => {
         execSync('python --version',{stdio: 'inherit'}) 
         // execute my script
         execSync(
-                'python ./scripts/loadtest/trigger.py '+commandToAdd.target_url+' '+commandToAdd.virtual_users+' '+commandToAdd.test_duration,
+                'python ..core/scripts/loadtest/trigger.py '+commandToAdd.target_url+' '+commandToAdd.virtual_users+' '+commandToAdd.test_duration,
                 {stdio: 'inherit'}
         );
             
