@@ -23,8 +23,16 @@ controller.addCommand = async (req, res) => {
         logger.info('...'+commandToAdd.test_duration+'...');
         
         logger.info('Executing Python script...');
-        const spawn = require("child_process").spawn;
-        const execString = spawn('python',["../scripts/loadtest/trigger.py", commandToAdd.target_url, commandToAdd.virtual_users, commandToAdd.test_duration]);
+        
+        const { execSync } = require('child_process');
+        // test execution        
+        execSync('python --version',{stdio: 'inherit'}) 
+        // execute my script
+        execSync(
+                'python ./scripts/loadtest/trigger.py '+commandToAdd.target_url+' '+commandToAdd.virtual_users+' '+commandToAdd.test_duration,
+                {stdio: 'inherit'}
+        );
+            
         logger.info('Python script executed...');
         
         // add command to db
