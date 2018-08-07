@@ -16,24 +16,22 @@ controller.addCommand = async (req, res) => {
     try {
         // Put your script here to been executed when requested... 
         
-        // execString(`echo quantity: ${commandToAdd.quantity}, userId: ${commandToAdd.userId}`)
+         // execString(`echo quantity: ${commandToAdd.quantity}, userId: ${commandToAdd.userId}`)
         // execString(`python ../scripts/loadtest/trigger.py ${commandToAdd.target_url} ${commandToAdd.virtual_users} ${commandToAdd.test_duration}`)
-        logger.info('...'+commandToAdd.target_url+'...');
-        logger.info('...'+commandToAdd.virtual_users+'...');
-        logger.info('...'+commandToAdd.test_duration+'...');
+        // const spawn = require("child_process").spawn;
+        // const execString = spawn('python',["../scripts/loadtest/trigger.py", commandToAdd.target_url, commandToAdd.virtual_users, commandToAdd.test_duration]);
+        logger.info(target_url+'...'+commandToAdd.target_url);
+        logger.info(virtual_users+'...'+commandToAdd.virtual_users);
+        logger.info(test_duration+'...'+commandToAdd.test_duration);
         
-        logger.info('Executing Python script...');
-        
-        const { execSync } = require('child_process');
-        // test execution        
-        execSync('python --version',{stdio: 'inherit'}) 
-        // execute my script
-        execSync(
-                'python ..core/scripts/loadtest/trigger.py '+commandToAdd.target_url+' '+commandToAdd.virtual_users+' '+commandToAdd.test_duration,
-                {stdio: 'inherit'}
-        );
-            
-        logger.info('Python script executed...');
+        // const { execSync } = require('child_process');
+        // execSync(
+        //         'python ./scripts/loadtest/trigger.py '+commandToAdd.target_url+' '+commandToAdd.virtual_users+' '+commandToAdd.test_duration,
+        //         {stdio: 'inherit'}
+        // );
+        execString(
+            `python ./scripts/loadtest/trigger.py ${commandToAdd.target_url} ${commandToAdd.virtual_users} ${commandToAdd.test_duration}`
+        )
         
         // add command to db
         const savedCommand = await Command.addCommand(commandToAdd);
