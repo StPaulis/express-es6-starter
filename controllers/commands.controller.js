@@ -24,14 +24,16 @@ controller.addCommand = async (req, res) => {
         logger.info(virtual_users+'...'+commandToAdd.virtual_users);
         logger.info(test_duration+'...'+commandToAdd.test_duration);
         
-        // const { execSync } = require('child_process');
-        // execSync(
-        //         'python ./scripts/loadtest/trigger.py '+commandToAdd.target_url+' '+commandToAdd.virtual_users+' '+commandToAdd.test_duration,
-        //         {stdio: 'inherit'}
-        // );
+        const { execSync } = require('child_process');
         execString(
-            `python ./scripts/loadtest/trigger.py ${commandToAdd.target_url} ${commandToAdd.virtual_users} ${commandToAdd.test_duration}`
-        )
+            execSync(
+                    'python ./scripts/loadtest/trigger.py '+
+                    commandToAdd.target_url+' '+
+                    commandToAdd.virtual_users+' '+
+                    commandToAdd.test_duration,
+                    {stdio: 'inherit'}
+            )
+        );
         
         // add command to db
         const savedCommand = await Command.addCommand(commandToAdd);
